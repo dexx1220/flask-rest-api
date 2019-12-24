@@ -1,13 +1,12 @@
-import connexion
 from flask import render_template
+import config
 
-app = connexion.App(__name__, specification_dir="./")
+connex_app = config.connex_app
+connex_app.add_api("swagger.yml")
 
-app.add_api("swagger.yml")
-
-@app.route("/")
+@connex_app.route("/")
 def home():
   return render_template("home.html")
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  connex_app.run(debug=True)
