@@ -1,6 +1,6 @@
 from flask import make_response, abort
 from config import db
-from models import Person, PersonSchema
+from models import Person, PersonSchema, Note
 
 
 def read_all():
@@ -9,7 +9,7 @@ def read_all():
   return person_schema.dump(people)
 
 def read_one(person_id):
-  person = Person.query.filter(Person.person_id == person_id).one_or_none()
+  person = Person.query.filter(Person.person_id == person_id).outerjoin(Note).one_or_none()
   if person is not None:
     person_schema = PersonSchema()
     return person_schema.dump(person)
