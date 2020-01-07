@@ -1,8 +1,8 @@
 from flask import make_response, abort
 from config import db
-from models import Person, Note
-from schema import PersonSchema
-
+from models.person import Person
+from models.note import Note
+from schemas.person import PersonSchema
 
 def read_all():
   people = Person.query.order_by(Person.lname).all()

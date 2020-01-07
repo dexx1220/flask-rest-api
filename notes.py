@@ -1,7 +1,8 @@
 from flask import make_response, abort
 from config import db
-from models import Person, Note
-from schema import NoteSchema
+from models.person import Person
+from models.note import Note
+from schemas.note import NoteSchema
 
 def read_all():
   notes = Note.query.order_by(db.desc(Note.timestamp)).all()
